@@ -1,10 +1,9 @@
+import EtheLeRandom
 import roles
 import playerList
 from EtheLeRandom import randint
 from colorama import Fore
 
-MaxApoc = randint(1, 4)
-MaxCoven = randint(2, 4)
 
 success = False
 
@@ -26,7 +25,26 @@ while not success:
     except:
         print(Fore.RED + "Invalid path!" + Fore.RESET)
 
-MaxNeutral = len(playerList.playerList) - MaxApoc - MaxCoven - randint(6, 10)+1
+def reset_max():
+    global maxEvilTeam, MaxCoven, MaxApoc, MaxNeutral
+    maxEvilTeam = EtheLeRandom.randint(0, 7)
+
+    MaxCoven = randint(3, 4)
+    MaxApoc = maxEvilTeam - MaxCoven
+
+    MaxNeutral = EtheLeRandom.randint(0, len(playerList.playerList) - maxEvilTeam - 7)
+
+    while MaxNeutral + maxEvilTeam < 5:
+        MaxNeutral = EtheLeRandom.randint(0, len(playerList.playerList) - maxEvilTeam - 7)
+
+reset_max()
+
+
+# coven is random from 2-4 and the rest of the maxEvilTeam goes to apoc!!!
+# how manny town tho??? gets determined by this!!
+# maxEvilTeam (apoc and coven) subtract total players from that, and minus how many town there going to be, if less then 5 evils, reroll how many neutral!
+
+#MaxNeutral = len(playerList.playerList) - MaxApoc - MaxCoven - randint(6, 10)+1
 
 Coven = roles.Coven()
 
@@ -127,7 +145,7 @@ def pirate():
         a = playerList.all_roles[randint(0, len(playerList.all_roles)-1)]
         landlubbers.append(a)
 
-        b = playerList.town_members[randint(0, len(playerList.town_members)-1)]
+        b = playerList.town_roles[randint(0, len(playerList.town_roles)-1)]
         landlubbers.append(b)
 
         c = playerList.coven_members[randint(0, len(playerList.coven_members)-1)]
@@ -136,7 +154,7 @@ def pirate():
         for i in range(len(landlubbers)):
             print(Fore.CYAN + f"Landlubber: {landlubbers[i]}")
 
-
+#kill yourself, nathan
 
 for k, v in playerList.playerRoleList.items():
 
@@ -164,7 +182,7 @@ while True:
     print("\n\n")
     roll_again = input(Fore.CYAN + "Press enter to roll again!" + Fore.RESET)
 
-    if not roll_again:
+    if not roll_again or roll_again:
 
         clear_screen()
 
@@ -182,6 +200,8 @@ while True:
         with open(path, 'r') as file:
             for line in file:
                 playerList.playerList.append(line.strip())
+
+        reset_max()
 
         StartNewGame()
 

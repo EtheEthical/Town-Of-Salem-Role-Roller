@@ -26,6 +26,7 @@ class Coven:
                 if role == "Coven Leader":
                     self.power.remove("Coven Leader")
                     self.killing.remove("Coven Leader")
+                    playerList.all_evil_roles.append(role)
 
             else:
                 role = self.everythingelse[randint(0, len(self.everythingelse)-1)]
@@ -34,6 +35,7 @@ class Coven:
                 if role == "Coven Leader":
                     self.power.remove("Coven Leader")
                     self.killing.remove("Coven Leader")
+                    playerList.all_evil_roles.append(role)
 
         elif not self.killing_selected:
             if randint(1, 2) == 1:
@@ -42,12 +44,15 @@ class Coven:
                 if role == "Coven Leader":
                     self.power.remove("Coven Leader")
                     self.killing.remove("Coven Leader")
+                    playerList.all_evil_roles.append(role)
             else:
                 role = self.everythingelse[randint(0, len(self.everythingelse) - 1)]
                 self.everythingelse.remove(role)
                 if role == "Coven Leader":
                     self.power.remove("Coven Leader")
                     self.killing.remove("Coven Leader")
+                    playerList.all_evil_roles.append(role)
+
 
 
         else:
@@ -81,6 +86,8 @@ class Apoc:
             self.roles.remove(role)
             playerList.playerRoleList[player] = role
             playerList.all_roles.append(role)
+            playerList.all_evil_roles.append(role)
+
 
 
 class Neutral:
@@ -113,6 +120,7 @@ class Neutral:
             self.pirate = True
         else:
             playerList.all_roles.append(role)
+            playerList.all_evil_roles.append(role)
 
 
 class Town:
@@ -149,15 +157,19 @@ class Town:
                 role = self.power[randint(0, len(self.power)-1)]
                 self.power.remove(role)
                 self.power_count = self.power_count + 1
+                playerList.town_roles.append(role)
             else:
                 role = self.everythingelse[randint(0, len(self.everythingelse)-1)]
                 playerList.town_members.append(player)
+                playerList.town_roles.append(role)
         else:
             role = self.everythingelse[randint(0, len(self.everythingelse) - 1)]
             playerList.town_members.append(player)
+            playerList.town_roles.append(role)
 
         playerList.playerRoleList[player] = role
         playerList.all_roles.append(role)
+        playerList.town_roles.append(role)
 
         if role == "Alchemist":
             self.alchemist_lol = True

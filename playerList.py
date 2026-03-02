@@ -76,5 +76,9 @@ town = ["Alchemist",
 
 town_members = []
 coven_members = []
+town_roles = []
+
+all_evil_roles = []
+#sybau sean
 
 all_roles = []
