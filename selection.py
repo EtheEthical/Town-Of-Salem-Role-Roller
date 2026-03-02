@@ -37,6 +37,7 @@ def reset_max():
     while MaxNeutral + maxEvilTeam < 5:
         MaxNeutral = EtheLeRandom.randint(0, len(playerList.playerList) - maxEvilTeam - 7)
 
+#resets the max
 reset_max()
 
 
