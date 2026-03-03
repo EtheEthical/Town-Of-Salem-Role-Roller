@@ -15,14 +15,14 @@ def process():
 
     text = data.get("text", "")
 
-    playerList.playerList.clear()
-    playerList.playerRoleList.clear()
-
     playerList.town_members.clear()
     playerList.coven_members.clear()
     playerList.town_roles.clear()
     playerList.all_evil_roles.clear()
     playerList.all_roles.clear()
+
+    playerList.playerList.clear()
+    playerList.playerRoleList.clear()
 
     playerList.playerList.extend([line.strip() for line in text.splitlines() if line.strip()])
 
