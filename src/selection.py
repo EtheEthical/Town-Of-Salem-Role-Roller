@@ -1,10 +1,8 @@
-import EtheLeRandom
-import roles
-import playerList
-from EtheLeRandom import randint
+from src import EtheLeRandom, playerList, roles
+from src.EtheLeRandom import randint
 from colorama import Fore
 
-
+'''
 success = False
 
 print("Formatting: ")
@@ -25,6 +23,7 @@ while not success:
     except:
         print(Fore.RED + "Invalid path!" + Fore.RESET)
 
+'''
 def reset_max():
     global maxEvilTeam, MaxCoven, MaxApoc, MaxNeutral
     maxEvilTeam = EtheLeRandom.randint(0, 7)
@@ -36,9 +35,6 @@ def reset_max():
 
     while MaxNeutral + maxEvilTeam < 5:
         MaxNeutral = EtheLeRandom.randint(0, len(playerList.playerList) - maxEvilTeam - 7)
-
-#resets the max
-reset_max()
 
 
 # coven is random from 2-4 and the rest of the maxEvilTeam goes to apoc!!!
@@ -60,10 +56,11 @@ def StartNewGame():
     CovenCount = 0
     ApocCount = 0
     NeutralCount = 0
+    reset_max()
 
     while playerList.playerList:
 
-        playerfr = playerList.playerList[randint(0, len(playerList.playerList)-1)]
+        playerfr = playerList.playerList[randint(0, len(playerList.playerList) - 1)]
 
         if CovenCount < MaxCoven:
             Coven.select_role(playerfr)
@@ -84,11 +81,12 @@ def StartNewGame():
             Town.select_role(playerfr)
             playerList.playerList.remove(playerfr)
 
-
+'''
 try:
     StartNewGame()
 except:
     StartNewGame()
+'''
 
 no_no_roles = ["Coven Leader", "Dreamweaver", "Illusionist", "Enchanter", "Medusa", "Voodoo Master"]
 
@@ -101,7 +99,7 @@ def alchemy():
             pot_role = Coven.power[randint(0, len(Coven.power)-1)]
             if pot_role not in no_no_roles:
                 role = pot_role
-                print(Fore.CYAN + f"The Alchemists's Ability is {role}!" + Fore.RESET)
+                return f"The Alchemists's Ability is {role}!"
 
             else:
                 alchemy()
@@ -109,7 +107,7 @@ def alchemy():
             pot_role = Coven.killing[randint(0, len(Coven.killing)-1)]
             if pot_role not in no_no_roles:
                 role = pot_role
-                print(Fore.CYAN + f"The Alchemists's Ability is {role}!" + Fore.RESET)
+                return f"The Alchemists's Ability is {role}!"
 
             else:
                 alchemy()
@@ -118,7 +116,7 @@ def alchemy():
             pot_role = Coven.everythingelse[randint(0, len(Coven.everythingelse)-1)]
             if pot_role not in no_no_roles:
                 role = pot_role
-                print(Fore.CYAN + f"The Alchemist's Ability is {role}!" + Fore.RESET)
+                return f"The Alchemist's Ability is {role}!"
 
             else:
                 alchemy()
@@ -131,32 +129,30 @@ def clear_screen():
 
 def exe():
     if Neutral.exe:
-        thing = playerList.town_members[randint(0, len(playerList.town_members)-1)]
-        print(Fore.CYAN + f"The Executioner's Target is {thing}")
+        thing = playerList.town_members[randint(0, len(playerList.town_members) - 1)]
+        return f"The Executioner's Target is {thing}\n"
 
 def admirer():
     for i in range(Town.admirer):
-        thing = playerList.town_members[randint(0, len(playerList.town_members)-1)]
-        print(Fore.CYAN + f"The Admirer's Obsession is {thing}")
+        thing = playerList.town_members[randint(0, len(playerList.town_members) - 1)]
         playerList.town_members.remove(thing)
+        return f"The Admirer's Obsession is {thing}\n"
+
 
 def pirate():
-    landlubbers = []
     if Neutral.pirate:
-        a = playerList.all_roles[randint(0, len(playerList.all_roles)-1)]
-        landlubbers.append(a)
+        result = ""
+        a = playerList.all_roles[randint(0, len(playerList.all_roles) - 1)]
+        b = playerList.town_roles[randint(0, len(playerList.town_roles) - 1)]
+        c = playerList.coven_members[randint(0, len(playerList.coven_members) - 1)]
 
-        b = playerList.town_roles[randint(0, len(playerList.town_roles)-1)]
-        landlubbers.append(b)
+        for landlubber in [a, b, c]:
+            result += f'<span style="color:cyan">Landlubber: {landlubber}</span><br>'
 
-        c = playerList.coven_members[randint(0, len(playerList.coven_members)-1)]
-        landlubbers.append(c)
-
-        for i in range(len(landlubbers)):
-            print(Fore.CYAN + f"Landlubber: {landlubbers[i]}")
+        return result
 
 #kill yourself, nathan
-
+'''
 for k, v in playerList.playerRoleList.items():
 
     color = Fore.WHITE
@@ -173,10 +169,10 @@ for k, v in playerList.playerRoleList.items():
     print(color + f"{k}: {v}")
 
 print('')
-pirate()
-alchemy()
-exe()
-admirer()
+print(pirate())
+print(alchemy())
+print(exe())
+print(admirer())
 
 
 while True:
@@ -224,3 +220,4 @@ while True:
         alchemy()
         exe()
         admirer()
+'''

@@ -1,5 +1,6 @@
-from EtheLeRandom import randint
-import playerList
+from src.EtheLeRandom import randint
+from src import playerList
+
 
 class Coven:
     def __init__(self):

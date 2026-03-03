@@ -19,7 +19,8 @@ death_announcements = 1432858492842283089
 
 MaxApoc = randint(0, 4)
 MaxCoven = randint(2, 4)
-MaxNeutral = len(playerList.playerList) - MaxApoc - MaxCoven - randint(5, len(playerList.playerList)-MaxCoven-MaxApoc+5)
+MaxNeutral = len(playerList.playerList) - MaxApoc - MaxCoven - randint(5, len(
+    playerList.playerList) - MaxCoven - MaxApoc + 5)
 
 
 def addPlayerToGame(player):
@@ -39,7 +40,7 @@ def StartNewGame():
 
     while playerList.playerList:
 
-        playerfr = playerList.playerList[randint(0, len(playerList.playerList)-1)]
+        playerfr = playerList.playerList[randint(0, len(playerList.playerList) - 1)]
 
         if CovenCount < MaxCoven:
             Coven.select_role(playerfr)

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>TOS Role Roller</title>
+</head>
+<body>
+<h1 style="text-align: center; font-family: Arial;" >Town of Salem Role Roller</h1>
+  <div style="display: flex; gap: 20px; justify-content: center;">
+
+    <div>
+      <textarea class="inputBoxfr" id="inputBox" rows="20" cols="40" placeholder="Type player list here..." style="background-color=#222222; font-size: 24px;" ></textarea>
+      <br>
+      <button onclick="sendText()">Roll Roles →</button>
+    </div>
+
+<div id="outputBox" style="width: 300px; min-height: 200px;">
+</div>
+
+  </div>
+
+  <script>
+    async function sendText() {
+      const inputText = document.getElementById("inputBox").value;
+
+      const response = await fetch("/process", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ text: inputText })
+      });
+
+      const data = await response.json();
+      document.getElementById("outputBox").innerHTML = data.result;
+    }
+  </script>
+
+ <style>
+    body {
+        background-color: #1a1a1a;
+        color: white;
+        font-family: Arial;
+    }
+
+   button {
+   background-color: #222222;
+   color: white;
+   font-family: Arial;
+   }
+
+   .inputBoxfr {
+      background-color: #222222;
+      color: white;
+      font-family: Arial;
+   }
+</style>
+</body>
+</html>
